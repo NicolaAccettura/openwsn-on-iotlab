@@ -6,7 +6,7 @@ import subprocess
 import argparse
 import shutil
 
-PYTHON_RELEASE = ['2','7','8']
+PYTHON_RELEASE = ['2','7','13']
 
 FIRMWARE_REPOSITORY     = 'https://github.com/openwsn-berkeley/openwsn-fw.git'
 SOFTWARE_REPOSITORY     = 'https://github.com/openwsn-berkeley/openwsn-sw.git'
@@ -220,7 +220,7 @@ def install(args):
     # run auth-cli: once done, it won't be executed again in the future, unless ~/.iotlabrc is deleted (uninstall will never do it)
     
     if not os.path.isfile(os.path.join(home,'.iotlabrc')):
-        s = subprocess.Popen('users',stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        s = subprocess.Popen('whoami',stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         stdout,_ = s.communicate()
         username = stdout.strip()
         subprocess.call(['auth-cli','-u',username])
